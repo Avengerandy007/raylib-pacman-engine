@@ -1,0 +1,6 @@
+#include "../Raylib/include/raylib.h"
+#include <iostream>
+
+int main(){
+	std::cout << "Hello World!" << std::endl;
+}
