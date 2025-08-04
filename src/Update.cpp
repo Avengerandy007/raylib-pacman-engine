@@ -9,7 +9,7 @@ void ResfreshWindow(){
 }
 
 void Update(){
-	InitWindow(640, 480, "Pacman");
+	InitWindow(1000, 1000, "Pacman");
 	SetExitKey(KEY_NULL);
 	bool running = true;
 	while (running){

@@ -1,4 +1,5 @@
 #include "../include/Update.hpp"
+#include "../include/Tile.hpp"
 #include <iostream>
 
 int main(){
