@@ -1,3 +1,4 @@
+#pragma once
 #include <memory>
 #include "Entity.hpp"
 #include "Matrix.hpp"

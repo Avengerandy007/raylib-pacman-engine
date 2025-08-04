@@ -1,5 +1,4 @@
 #include "../include/Tile.hpp"
-#include <algorithm>
 
 Matrix2<Tile*> Tile::tileSet(20, 20);
 
