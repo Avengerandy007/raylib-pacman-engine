@@ -1,20 +1,23 @@
 #pragma once
 #include "../Raylib/include/raylib.h"
-#include <bits/types/FILE.h>
+#include "Tile.hpp"
+#include <cstdint>
 #include <memory>
 #include <string>
 
 class Controller{
-	int speed;
+	uint16_t m_speed;
+	bool CheckWall(uint8_t x, uint8_t y);
+	uint8_t X, Y;
 public:
 	Vector2 dir;
-
-	void Move(Vector2& pos);
+	Controller(uint16_t speed);
+	void Move();
 };
 
 class TileCollider{
 public:
-	bool Colliding(std::unique_ptr<Rectangle> myRect);
+	bool Colliding(std::unique_ptr<Tile> currentTile);
 };
 
 class ImageTexture{
