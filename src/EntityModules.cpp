@@ -60,3 +60,23 @@ void ImageTexture::Render(std::shared_ptr<Rectangle> rect){
 ImageTexture::~ImageTexture(){
 	UnloadTexture(texture);
 }
+
+/*
+ *	INPUT HANDLER CLASS
+ */
+
+void InputHandler::ChangeDirection(Vector2 &dir){
+	if(IsKeyPressed(KEY_LEFT)){
+		dir.x = -1;
+		dir.y = 0;
+	}else if (IsKeyPressed(KEY_RIGHT)){
+		dir.x = 1;
+		dir.y = 0;
+	}else if (IsKeyPressed(KEY_DOWN)){
+		dir.x = 0;
+		dir.y = 1;
+	}else if (IsKeyPressed(KEY_UP)){
+		dir.x = 0;
+		dir.y = -1;
+	}
+}
