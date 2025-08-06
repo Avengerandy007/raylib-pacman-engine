@@ -8,5 +8,5 @@ public:
 	Rectangle m_def; //Definition of tile
 	std::unique_ptr<Entity>	m_containedEntity = std::make_unique<Entity>();
 	Tile();
-	static Matrix2<Tile*> tileSet;
+	static Matrix2<std::shared_ptr<Tile>, 20> tileSet;
 };

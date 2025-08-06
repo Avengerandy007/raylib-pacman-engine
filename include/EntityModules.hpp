@@ -21,11 +21,12 @@ public:
 };
 
 class ImageTexture{
-	std::string path;
+	static const std::string path;
+	Image image;
 	Texture2D texture;
 public:
-	ImageTexture();
-	void Render(Rectangle rect);
+	ImageTexture(std::string fileName);
+	void Render(std::shared_ptr<Rectangle> rect);
 	~ImageTexture();
 };
 

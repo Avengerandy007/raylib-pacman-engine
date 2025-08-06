@@ -3,6 +3,6 @@
 #include <memory>
 class Entity{
 public:
-	std::unique_ptr<Rectangle> rect = std::make_unique<Rectangle>();
+	std::shared_ptr<Rectangle> rect = std::make_shared<Rectangle>();
 	virtual void Update();
 };
