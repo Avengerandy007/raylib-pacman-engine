@@ -1,6 +1,5 @@
 #pragma once
 #include "../Raylib/include/raylib.h"
-#include "Tile.hpp"
 #include <cstdint>
 #include <memory>
 #include <string>
@@ -15,6 +14,7 @@ public:
 	void Move();
 };
 
+class Tile;
 class TileCollider{
 public:
 	bool Colliding(std::unique_ptr<Tile> currentTile);

@@ -1,4 +1,5 @@
 #include "../include/Update.hpp"
+#include "../include/Tile.hpp"
 
 void ResfreshWindow(){
 	BeginDrawing();
@@ -9,13 +10,10 @@ void ResfreshWindow(){
 }
 
 void Update(){
-	InitWindow(1000, 1000, "Pacman");
-	SetExitKey(KEY_NULL);
 	bool running = true;
 	while (running){
 		if (WindowShouldClose()) running = false;
 		ResfreshWindow();
-
+		Tile::tileSet.matrix[0][0].m_containedEntity->Update();
 	}
-	CloseWindow();
 }

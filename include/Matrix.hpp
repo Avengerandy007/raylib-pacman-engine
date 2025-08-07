@@ -4,5 +4,5 @@
 
 template<typename T, int size>
 struct Matrix2{
-	std::array<std::array<T, size>, size> matrix;
+	std::array<std::array<T, size>, size> matrix = {};
 };
