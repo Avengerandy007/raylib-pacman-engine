@@ -8,26 +8,31 @@ RayLib = ./Raylib
 ifeq ($(CXX),clang++)
 # Linux deployment
 CXXFLAGS = -std=c++20 -Wall -g $(RayLib --cflags)
-LDFLAGS  = $(RayLib --libs)
+#LDFLAGS  = $(RayLib --libs)
 else
 # Windows deployment
 CXXFLAGS = -std=c++20 -Wall -g -I$(RayLib)/include -static-libstdc++ -static-libgcc -O2 -DNDEBUG
-LDFLAGS  = -L$(RayLib)/lib -lraylib -lopengl32 -lgdi32 -lwinmm -mconsole #-mwindows 
+#LDFLAGS  = -L$(RayLib)/lib -lraylib -lopengl32 -lgdi32 -lwinmm -mconsole #-mwindows 
 endif
 
-# Files
+# Files & directories
 SRCS := $(wildcard src/*.cpp)
-OBJS := $(SRCS:.cpp=.o)
-TARGET = Pacman
+BUILD_DIR := build
+OBJS := $(patsubst src/%.cpp,$(BUILD_DIR)/%.o,$(SRCS))
+TARGET = libpacman.a
 
-# Build app
+# Default rule
+all: $(TARGET)
+
+# Build static library
 $(TARGET): $(OBJS)
-	$(CXX) $(CXXFLAGS) -o $@ $(OBJS) $(LDFLAGS)
+	ar rcs $@ $(OBJS)
 
-# Compile .cpp to .o
-src/%.o: src/%.cpp
+# Compile .cpp to .o (in build dir)
+$(BUILD_DIR)/%.o: src/%.cpp
+	@mkdir -p $(BUILD_DIR)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 # Clean
 clean:
-	rm -f $(TARGET) $(OBJS)
+	rm -rf $(BUILD_DIR) $(TARGET)

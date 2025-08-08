@@ -1,4 +1,4 @@
-#include "../include/Update.hpp"
+/*#include "../include/Update.hpp"
 #include "../include/Tile.hpp"
 #include <iostream>
 #include <memory>
@@ -15,7 +15,6 @@ int main(){
 	println("Started raylib");
 	Tile::InitTileSet();
 	println("Created tiles");
-	Tile::tileSet.matrix[0][0].m_containedEntity = std::make_unique<Entity>("Wall.png");
 	Update();
 	CloseWindow();
-}
+}*/
