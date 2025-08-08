@@ -1,7 +1,9 @@
 #include "../include/Entity.hpp"
 
-Entity::Entity(std::string textureName) : texture(textureName){}
+/*
+ *	WALL CLASS
+ */
 
-void Entity::Update(){
+void Wall::Update(){
 	texture.Render(rect);
 }

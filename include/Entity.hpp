@@ -7,7 +7,11 @@
 class Entity{
 public:
 	std::shared_ptr<Rectangle> rect = std::make_shared<Rectangle>();
-	ImageTexture texture;
-	virtual void Update();
-	Entity(std::string textureName);
+	virtual void Update() = 0;
+};
+
+class Wall : public Entity{
+	ImageTexture texture = ImageTexture("Wall.png");
+public:
+	void Update() override;
 };
