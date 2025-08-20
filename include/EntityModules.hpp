@@ -26,6 +26,7 @@ class ImageTexture{
 	Texture2D texture;
 	void LoadTexturesInMap();
 public:
+	ImageTexture();
 	ImageTexture(std::string fileName);
 	void Render(std::shared_ptr<Rectangle> rect);
 	~ImageTexture();

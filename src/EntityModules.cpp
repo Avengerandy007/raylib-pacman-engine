@@ -47,6 +47,8 @@ bool TileCollider::Colliding(std::unique_ptr<Tile> currentTile){
 
 const std::string ImageTexture::path = "resources/";
 
+ImageTexture::ImageTexture(){}
+
 ImageTexture::ImageTexture(std::string fileName){
 	if (fileName == "") return;
 	std::cout << "Assigning " << fileName << " to this\n";

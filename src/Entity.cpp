@@ -4,8 +4,9 @@
  *	WALL CLASS
  */
 
-void Wall::LoadTextures(){
-	texture = ImageTexture("Wall.png");
+ImageTexture& Wall::Texture(){
+	static ImageTexture texture("Wall.png");
+	return texture;
 }
 
 Wall::Wall(){
@@ -13,5 +14,5 @@ Wall::Wall(){
 }
 
 void Wall::Update(){
-	texture.Render(rect);
+	Texture().Render(rect);
 }
