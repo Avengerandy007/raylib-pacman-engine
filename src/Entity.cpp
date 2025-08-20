@@ -3,6 +3,11 @@
 /*
  *	WALL CLASS
  */
+
+void Wall::LoadTextures(){
+	texture = ImageTexture("Wall.png");
+}
+
 Wall::Wall(){
 	typeId = WALL;
 }

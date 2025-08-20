@@ -1,5 +1,6 @@
-#include "../include/EntityModules.hpp"
 #include "../include/Tile.hpp"
+#include "../include/Entity.hpp"
+#include <map>
 #include <iostream>
 #include <cstddef>
 #include <cstdint>
@@ -54,7 +55,6 @@ ImageTexture::ImageTexture(std::string fileName){
 	ImageResize(&image, 50, 50);
 	texture = LoadTextureFromImage(image);
 	UnloadImage(image);
-	
 }
 
 void ImageTexture::Render(std::shared_ptr<Rectangle> rect){

@@ -17,7 +17,8 @@ public:
 };
 
 class Wall : public Entity{
-	ImageTexture texture = ImageTexture("Wall.png");
+	static ImageTexture texture;
+	static void LoadTextures();
 public:
 	Wall();
 	void Update() override;
