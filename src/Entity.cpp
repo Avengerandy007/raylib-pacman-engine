@@ -4,7 +4,7 @@
  *	WALL CLASS
  */
 Wall::Wall(){
-	typeId = 1;
+	typeId = WALL;
 }
 
 void Wall::Update(){
