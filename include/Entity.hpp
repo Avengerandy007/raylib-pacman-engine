@@ -11,7 +11,7 @@ enum TypeId{
 
 class Entity{
 public:
-	std::shared_ptr<Rectangle> rect = std::make_shared<Rectangle>();
+	std::shared_ptr<Rectangle> rect;
 	TypeId typeId; 
 	virtual void Update() = 0;
 };

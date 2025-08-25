@@ -19,6 +19,8 @@ namespace FileI{
 		}
 	}
 
+
+
 	Matrix2<Tile, 20> MakeMatrix(std::ifstream file){
 		Matrix2<Tile, 20> matrix;
 		if (!file.is_open()) return matrix;
@@ -46,6 +48,7 @@ namespace FileI{
 				currentChar++;
 			}
 		}
+		std::cout << "Finished creating matrix\n";
 		return matrix;
 	}
 
