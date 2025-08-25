@@ -24,15 +24,27 @@ TARGET = libpacman.a
 # Default rule
 all: $(TARGET)
 
+# Ensure build directory exists
+$(BUILD_DIR):
+ifeq ($(OS),Windows_NT)
+	@if not exist $(BUILD_DIR) mkdir $(BUILD_DIR)
+else
+	@mkdir -p $(BUILD_DIR)
+endif
+
+# Compile .cpp -> .o
+$(BUILD_DIR)/%.o: src/%.cpp | $(BUILD_DIR)
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
 # Build static library
 $(TARGET): $(OBJS)
 	ar rcs $@ $(OBJS)
 
-# Compile .cpp to .o (in build dir)
-$(BUILD_DIR)/%.o: src/%.cpp
-	@mkdir -p $(BUILD_DIR)
-	$(CXX) $(CXXFLAGS) -c $< -o $@
-
 # Clean
 clean:
+ifeq ($(OS),Windows_NT)
+	-rmdir /s /q $(BUILD_DIR)
+	-del $(TARGET)
+else
 	rm -rf $(BUILD_DIR) $(TARGET)
+endif
