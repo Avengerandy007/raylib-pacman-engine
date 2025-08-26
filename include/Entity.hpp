@@ -7,6 +7,7 @@
 enum TypeId{
 	EMPTY = 0,
 	WALL = 1,
+	PLAYER = 2,
 };
 
 class Entity{
@@ -20,5 +21,15 @@ class Wall : public Entity{
 public:
 	static ImageTexture& Texture();
 	Wall();
+	void Update() override;
+};
+
+class Player : public Entity{
+	Controller controller;
+	TileCollider collider;
+	InputHandler input;
+public:
+	static ImageTexture& Texture();
+	Player();
 	void Update() override;
 };

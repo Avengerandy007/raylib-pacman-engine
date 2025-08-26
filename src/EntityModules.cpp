@@ -10,26 +10,42 @@
  *	CONTROLLER CLASS
  */
 
-Controller::Controller(uint16_t speed){
+Controller::Controller(uint16_t speed, uint8_t x, uint8_t y){
 	m_speed = speed;
+	X = x;
+	Y = y;
 }
 
-bool Controller::CheckWall(uint8_t x, uint8_t y){
-	x += dir.x * m_speed;
-	y += dir.y * m_speed;
-	if (dynamic_cast<Entity*>(Tile::tileSet.matrix[x][y].m_containedEntity.get())){
-		X = x;
-		Y = y;
+bool Controller::CheckWall(uint8_t& destx, uint8_t& desty){
+	destx = X + (dir.x * m_speed);
+	desty = Y + (dir.y * m_speed);
+	std::cout << "Calculated destination\n";
+	if (Tile::tileSet.matrix[destx][desty].m_containedEntity == nullptr && destx <= 19 && desty <= 19 && destx >= 0 && desty >= 0){
 		return false;
-	}else return true;
+	}else{
+		std::cout << "HIT WALL\n";
+		return true;
+	}
 }
 
 void Controller::Move(){
+	uint8_t destX, destY;
+	if (CheckWall(destX, destY)) return;
 	Tile* origin = &Tile::tileSet.matrix[X][Y];
-	if (CheckWall(X, Y)) return;
-	Tile* destination = &Tile::tileSet.matrix[X][Y];
+	Tile* destination = &Tile::tileSet.matrix[destX][destY];
+	if (!origin->m_containedEntity){
+		std::cerr << "Origin contains a null entity\n";
+	}
+	if(destination->m_def == nullptr){
+		std::cerr << "Tile at " << (int)destX << ", " << (int)destY << " has null rect\n";
+		return;
+	}
+	X = destX;
+	Y = destY;
 	destination->m_containedEntity = std::move(origin->m_containedEntity);
-	destination->m_containedEntity->rect = std::make_shared<Rectangle>(destination->m_def);
+	destination->m_containedEntity->rect = destination->m_def;
+	std::cout << "Made entity rect = destination tile\n X = " << destination->m_containedEntity->rect->x << ", Y = " << destination->m_containedEntity->rect->y << "\n";
+	std::cout << "Controller pos:\nX = " << (int)X << ", Y = " << (int)Y << "\n";
 }
 
 /* 
@@ -72,18 +88,22 @@ ImageTexture::~ImageTexture(){
  *	INPUT HANDLER CLASS
  */
 
-void InputHandler::ChangeDirection(Vector2 &dir){
+void InputHandler::ProccesInput(Controller& controller){
 	if(IsKeyPressed(KEY_LEFT)){
-		dir.x = -1;
-		dir.y = 0;
+		controller.dir.x = -1;
+		controller.dir.y = 0;
+		controller.Move();
 	}else if (IsKeyPressed(KEY_RIGHT)){
-		dir.x = 1;
-		dir.y = 0;
+		controller.dir.x = 1;
+		controller.dir.y = 0;
+		controller.Move();
 	}else if (IsKeyPressed(KEY_DOWN)){
-		dir.x = 0;
-		dir.y = 1;
+		controller.dir.x = 0;
+		controller.dir.y = 1;
+		controller.Move();
 	}else if (IsKeyPressed(KEY_UP)){
-		dir.x = 0;
-		dir.y = -1;
+		controller.dir.x = 0;
+		controller.dir.y = -1;
+		controller.Move();
 	}
 }

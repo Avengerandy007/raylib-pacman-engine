@@ -6,17 +6,16 @@
 
 class Controller{
 	uint16_t m_speed;
-	bool CheckWall(uint8_t x, uint8_t y);
+	bool CheckWall(uint8_t& destx, uint8_t& desty);
 	uint8_t X, Y;
 public:
 	Vector2 dir;
-	Controller(uint16_t speed);
+	Controller(uint16_t speed, uint8_t x, uint8_t y);
 	void Move();
 };
 
 class Tile;
-class TileCollider{
-public:
+struct TileCollider{
 	bool Colliding(std::unique_ptr<Tile> currentTile);
 };
 
@@ -32,7 +31,6 @@ public:
 	~ImageTexture();
 };
 
-class InputHandler{
-public:
-	void ChangeDirection(Vector2& dir);
+struct InputHandler{
+	void ProccesInput(Controller& controller);
 };
