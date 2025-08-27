@@ -30,14 +30,16 @@ bool Controller::CheckWall(uint8_t& destx, uint8_t& desty){
 }
 
 void Controller::Move(){
-	if(m_calledMoveThisFrame){
+	uint8_t destX, destY;
+
+	if (CheckWall(destX, destY)) return;
+
+	if(m_calledMoveThisFrame && (destX > X || destY > Y)){
 		m_calledMoveThisFrame = false;
 		return;
 	}
 
-	uint8_t destX, destY;
-
-	if (CheckWall(destX, destY)) return;
+	if (destX > X || destY > Y) m_calledMoveThisFrame = true;
 
 	Tile* origin = &Tile::tileSet.matrix[X][Y];
 	Tile* destination = &Tile::tileSet.matrix[destX][destY];
@@ -56,7 +58,6 @@ void Controller::Move(){
 	destination->m_containedEntity->rect = destination->m_def;
 	std::cout << "Made entity rect = destination tile\n X = " << destination->m_containedEntity->rect->x << ", Y = " << destination->m_containedEntity->rect->y << "\n";
 	std::cout << "Controller pos:\nX = " << (int)X << ", Y = " << (int)Y << "\n";
-	m_calledMoveThisFrame = true;
 }
 
 /* 
