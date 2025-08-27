@@ -9,6 +9,7 @@ class Controller{
 	bool CheckWall(uint8_t& destx, uint8_t& desty);
 	uint8_t X, Y;
 public:
+	bool m_calledMoveThisFrame;
 	Vector2 dir;
 	Controller(uint16_t speed, uint8_t x, uint8_t y);
 	void Move();

@@ -25,10 +25,10 @@ public:
 };
 
 class Player : public Entity{
-	Controller controller;
 	TileCollider collider;
 	InputHandler input;
 public:
+	Controller controller;
 	static ImageTexture& Texture();
 	Player();
 	void Update() override;

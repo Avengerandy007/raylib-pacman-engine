@@ -14,6 +14,7 @@ Controller::Controller(uint16_t speed, uint8_t x, uint8_t y){
 	m_speed = speed;
 	X = x;
 	Y = y;
+	m_calledMoveThisFrame = false;
 }
 
 bool Controller::CheckWall(uint8_t& destx, uint8_t& desty){
@@ -29,10 +30,18 @@ bool Controller::CheckWall(uint8_t& destx, uint8_t& desty){
 }
 
 void Controller::Move(){
+	if(m_calledMoveThisFrame){
+		m_calledMoveThisFrame = false;
+		return;
+	}
+
 	uint8_t destX, destY;
+
 	if (CheckWall(destX, destY)) return;
+
 	Tile* origin = &Tile::tileSet.matrix[X][Y];
 	Tile* destination = &Tile::tileSet.matrix[destX][destY];
+
 	if (!origin->m_containedEntity){
 		std::cerr << "Origin contains a null entity\n";
 	}
@@ -40,12 +49,14 @@ void Controller::Move(){
 		std::cerr << "Tile at " << (int)destX << ", " << (int)destY << " has null rect\n";
 		return;
 	}
+
 	X = destX;
 	Y = destY;
 	destination->m_containedEntity = std::move(origin->m_containedEntity);
 	destination->m_containedEntity->rect = destination->m_def;
 	std::cout << "Made entity rect = destination tile\n X = " << destination->m_containedEntity->rect->x << ", Y = " << destination->m_containedEntity->rect->y << "\n";
 	std::cout << "Controller pos:\nX = " << (int)X << ", Y = " << (int)Y << "\n";
+	m_calledMoveThisFrame = true;
 }
 
 /* 
