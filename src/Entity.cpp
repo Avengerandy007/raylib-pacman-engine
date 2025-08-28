@@ -1,5 +1,7 @@
 #include "../include/Entity.hpp"
 
+TYPE_OF_INSTANCE instance;
+
 /*
  *	WALL CLASS
  */
@@ -32,5 +34,5 @@ Player::Player() : controller(1, 0, 0){
 
 void Player::Update(){
 	Texture().Render(rect);
-	input.ProccesInput(controller);
+	if (instance == GAME) input.ProccesInput(controller);
 }

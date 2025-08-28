@@ -10,6 +10,13 @@ enum TypeId{
 	PLAYER = 2,
 };
 
+enum TYPE_OF_INSTANCE{
+	LEVEL_EDITOR,
+	GAME,
+};
+
+extern TYPE_OF_INSTANCE instance;
+
 class Entity{
 public:
 	std::shared_ptr<Rectangle> rect;
