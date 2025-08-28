@@ -39,11 +39,17 @@ namespace FileI{
 					case '1':
 						matrix.matrix[i][k].m_containedEntity = std::make_unique<Wall>();
 						break;
+
+					case '2':
+						matrix.matrix[i][k].m_containedEntity = std::make_unique<Player>();
+						break;
+
 					default:
 						std::cout << "Unrecognized char " << data[currentChar] << "\n";
 						i--;
 						k--;
 						break;
+
 				}
 				currentChar++;
 			}
