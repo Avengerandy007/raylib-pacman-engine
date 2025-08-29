@@ -42,9 +42,12 @@ public:
 class Player : public Entity{
 	TileCollider collider;
 	InputHandler input;
+	void HandleCollisions(Tile& currentTile);
 public:
+	uint32_t score;
 	Controller controller;
 	static ImageTexture& Texture();
 	Player();
+	Player(uint8_t x, uint8_t y);
 	void Update() override;
 };

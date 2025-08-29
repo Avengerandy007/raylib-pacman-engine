@@ -7,8 +7,8 @@
 class Controller{
 	uint16_t m_speed;
 	bool CheckWall(uint8_t& destx, uint8_t& desty);
-	uint8_t X, Y;
 public:
+	uint8_t X, Y;
 	bool m_calledMoveThisFrame;
 	Vector2 dir;
 	Controller(uint16_t speed, uint8_t x, uint8_t y);
@@ -17,7 +17,7 @@ public:
 
 class Tile;
 struct TileCollider{
-	bool Colliding(std::unique_ptr<Tile> currentTile);
+	bool Colliding(Tile& currentTile);
 };
 
 class ImageTexture{

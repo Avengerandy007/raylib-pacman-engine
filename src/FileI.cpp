@@ -41,7 +41,7 @@ namespace FileI{
 						break;
 
 					case '2':
-						matrix.matrix[i][k].m_containedEntity = std::make_unique<Player>();
+						matrix.matrix[i][k].m_containedEntity = std::make_unique<Player>(i, k);
 						break;
 
 					default:

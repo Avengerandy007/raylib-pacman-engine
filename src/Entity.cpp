@@ -1,4 +1,7 @@
 #include "../include/Entity.hpp"
+#include "../include/Tile.hpp"
+#include <iostream>
+#include <memory>
 
 TYPE_OF_INSTANCE instance;
 
@@ -28,13 +31,30 @@ ImageTexture& Player::Texture(){
 	return texture;
 }
 
-Player::Player() : controller(1, 0, 0){
+Player::Player() : controller(1, 0, 0){}
+
+Player::Player(uint8_t x, uint8_t y) : controller(1, x, y){
 	typeId = PLAYER;
+	score = 0;
 }
+
+void Player::HandleCollisions(Tile& currentTile){
+	if (collider.Colliding(currentTile)){
+		switch(currentTile.m_containedEntity->typeId){
+			case COIN:
+				score++;
+				currentTile.m_containedEntity = nullptr;
+				break;
+			default: break;
+		}
+	}
+} 
 
 void Player::Update(){
 	Texture().Render(rect);
 	if (instance == GAME) input.ProccesInput(controller);
+	HandleCollisions(Tile::tileSet.matrix[(int)controller.X + (int)controller.dir.x][(int)controller.Y + (int)controller.dir.y]);
+	controller.Move();
 }
 
 /*
