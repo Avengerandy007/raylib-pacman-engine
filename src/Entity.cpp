@@ -52,9 +52,11 @@ void Player::HandleCollisions(Tile& currentTile){
 
 void Player::Update(){
 	Texture().Render(rect);
-	if (instance == GAME) input.ProccesInput(controller);
-	HandleCollisions(Tile::tileSet.matrix[(int)controller.X + (int)controller.dir.x][(int)controller.Y + (int)controller.dir.y]);
-	controller.Move();
+	if (instance == GAME){
+		input.ProccesInput(controller);
+		HandleCollisions(Tile::tileSet.matrix[(int)controller.X + (int)controller.dir.x][(int)controller.Y + (int)controller.dir.y]);
+		controller.Move();
+	}
 }
 
 /*
