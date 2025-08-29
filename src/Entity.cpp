@@ -36,3 +36,20 @@ void Player::Update(){
 	Texture().Render(rect);
 	if (instance == GAME) input.ProccesInput(controller);
 }
+
+/*
+ *	COIN CLASS
+ */
+
+ImageTexture& Coin::Texture(){
+	static ImageTexture texture("Coin.png");
+	return texture;
+}
+
+Coin::Coin(){
+	typeId = COIN;
+}
+
+void Coin::Update(){
+	Texture().Render(rect);
+}

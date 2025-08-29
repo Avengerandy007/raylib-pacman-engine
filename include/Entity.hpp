@@ -8,6 +8,7 @@ enum TypeId{
 	EMPTY = 0,
 	WALL = 1,
 	PLAYER = 2,
+	COIN = 3,
 };
 
 enum TYPE_OF_INSTANCE{
@@ -28,6 +29,13 @@ class Wall : public Entity{
 public:
 	static ImageTexture& Texture();
 	Wall();
+	void Update() override;
+};
+
+class Coin : public Entity{
+public:
+	static ImageTexture& Texture();
+	Coin();
 	void Update() override;
 };
 
