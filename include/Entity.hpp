@@ -1,5 +1,4 @@
 #pragma once
-#include "../Raylib/include/raylib.h"
 #include "EntityModules.hpp"
 #include <memory>
 #include <string>
@@ -9,6 +8,7 @@ enum TypeId{
 	WALL = 1,
 	PLAYER = 2,
 	COIN = 3,
+	GHOST = 4,
 };
 
 enum TYPE_OF_INSTANCE{
@@ -49,5 +49,15 @@ public:
 	static ImageTexture& Texture();
 	Player();
 	Player(uint8_t x, uint8_t y);
+	void Update() override;
+};
+
+class Ghost : public Entity{
+	Controller controller;
+	void DecideDirections();
+public:
+	static ImageTexture& Texture();
+	Ghost();
+	Ghost(uint8_t x, uint8_t y);
 	void Update() override;
 };
