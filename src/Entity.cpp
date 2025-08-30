@@ -99,10 +99,12 @@ void Ghost::DecideDirections(){
 	std::cout << "Calculating direction\n";
 	controller.dir.y = 0;
 	controller.dir.x = 0;
+	Entity* player;
 	std::cout << "Reset dir\n";
 	for (uint8_t k = 0; k < 20; k++){
 		if (!Tile::tileSet.matrix[controller.X][k].m_containedEntity);
 		else if (Tile::tileSet.matrix[controller.X][k].m_containedEntity->typeId == PLAYER){
+			player = Tile::tileSet.matrix[controller.X][k].m_containedEntity.get();
 			if (k > controller.Y) controller.dir.y = 1;
 			else controller.dir.y = -1;
 			std::cout << "Player found\n";
@@ -117,6 +119,7 @@ void Ghost::DecideDirections(){
 		for (uint8_t i = 0; i < 20; i++){
 			if (!Tile::tileSet.matrix[i][controller.Y].m_containedEntity);
 			else if (Tile::tileSet.matrix[i][controller.Y].m_containedEntity->typeId == PLAYER){
+				player = Tile::tileSet.matrix[i][controller.Y].m_containedEntity.get();
 				if (i > controller.X) controller.dir.x = 1;
 				else controller.dir.x = -1;
 				std::cout << "Player found\n";
@@ -135,7 +138,7 @@ void Ghost::DecideDirections(){
 		std::cout << "Got current time for x\n";
 		uint32_t seed = std::chrono::time_point_cast<std::chrono::milliseconds>(now).time_since_epoch().count();
 		std::cout << "Made seed for x\n";
-		controller.dir.x = controller.X > 15 ? -1 : (seed * seed) % 2;
+		controller.dir.x = (seed * seed) % 2;
 		std::cout << "Calculated x = " << controller.dir.x << "\n";
 		if (controller.dir.x != 0) break;
 		now = std::chrono::system_clock::now();
