@@ -44,6 +44,10 @@ namespace FileI{
 						matrix.matrix[i][k].m_containedEntity = std::make_unique<Player>(i, k);
 						break;
 
+					case '3':
+						matrix.matrix[i][k].m_containedEntity = std::make_unique<Coin>();
+						break;
+
 					default:
 						std::cout << "Unrecognized char " << data[currentChar] << "\n";
 						i--;
