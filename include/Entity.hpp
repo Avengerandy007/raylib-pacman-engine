@@ -55,6 +55,7 @@ public:
 class Ghost : public Entity{
 	Controller controller;
 	void DecideDirections();
+	uint8_t framesSinceLastMove;
 public:
 	static ImageTexture& Texture();
 	Ghost();

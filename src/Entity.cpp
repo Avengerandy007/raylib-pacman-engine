@@ -84,6 +84,7 @@ void Coin::Update(){
 
 Ghost::Ghost() : controller(1, 0, 0){
 	typeId = GHOST;
+	framesSinceLastMove = 0;
 }
 
 ImageTexture& Ghost::Texture(){
@@ -93,6 +94,7 @@ ImageTexture& Ghost::Texture(){
 
 Ghost::Ghost(uint8_t x, uint8_t y) : controller(1, x, y){
 	typeId = GHOST;
+	framesSinceLastMove = 0;
 }
 
 void Ghost::DecideDirections(){
@@ -156,9 +158,11 @@ void Ghost::DecideDirections(){
 
 void Ghost::Update(){
 	Texture().Render(rect);
-	if (instance == GAME){
+	framesSinceLastMove++;
+	if (instance == GAME && framesSinceLastMove >= 30){
 		DecideDirections();
 		std::cout << "Dir x = " << (int)controller.dir.x << " y = " << (int)controller.dir.y << "\n";
 		controller.Move();
+		framesSinceLastMove = 0;
 	}
 }
