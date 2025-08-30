@@ -99,55 +99,59 @@ void Ghost::DecideDirections(){
 	std::cout << "Calculating direction\n";
 	controller.dir.y = 0;
 	controller.dir.x = 0;
-	Entity* player;
+	Player* player = nullptr;
 	std::cout << "Reset dir\n";
-	for (uint8_t k = 0; k < 20; k++){
-		if (!Tile::tileSet.matrix[controller.X][k].m_containedEntity);
-		else if (Tile::tileSet.matrix[controller.X][k].m_containedEntity->typeId == PLAYER){
-			player = Tile::tileSet.matrix[controller.X][k].m_containedEntity.get();
-			if (k > controller.Y) controller.dir.y = 1;
-			else controller.dir.y = -1;
-			std::cout << "Player found\n";
-			break;
-		}
-		std::cout << "Searching on K\n";
-	}
-
-	std::cout << "Direction on y = " << controller.dir.y << "\n";
-
-	if (controller.dir.y == 0){
-		for (uint8_t i = 0; i < 20; i++){
-			if (!Tile::tileSet.matrix[i][controller.Y].m_containedEntity);
-			else if (Tile::tileSet.matrix[i][controller.Y].m_containedEntity->typeId == PLAYER){
-				player = Tile::tileSet.matrix[i][controller.Y].m_containedEntity.get();
-				if (i > controller.X) controller.dir.x = 1;
-				else controller.dir.x = -1;
+	for (uint8_t i = 0; i < 20; i++){
+		for (uint8_t k = 0; k < 20; k++){
+			if (!Tile::tileSet.matrix[i][k].m_containedEntity) continue;
+			else if (Tile::tileSet.matrix[i][k].m_containedEntity->typeId == PLAYER){
+				player = dynamic_cast<Player*>(Tile::tileSet.matrix[i][k].m_containedEntity.get());
 				std::cout << "Player found\n";
 				break;
 			}
-			std::cout << "Searching on I\n";
 		}
 	}
 
-	std::cout << "Direction on x = " << controller.dir.x << "\n";
-	
-	if (controller.dir.x != 0 || controller.dir.y != 0) return;
-	while (controller.dir.x == 0 || controller.dir.y == 0){
-		std::cout << "Trying to randomize\n";
-		auto now = std::chrono::system_clock::now();
-		std::cout << "Got current time for x\n";
-		uint32_t seed = std::chrono::time_point_cast<std::chrono::milliseconds>(now).time_since_epoch().count();
-		std::cout << "Made seed for x\n";
-		controller.dir.x = (seed * seed) % 2;
-		std::cout << "Calculated x = " << controller.dir.x << "\n";
-		if (controller.dir.x != 0) break;
-		now = std::chrono::system_clock::now();
-		std::cout << "Got current time for y\n";
-		seed = std::chrono::time_point_cast<std::chrono::milliseconds>(now).time_since_epoch().count();
-		std::cout << "Made seed for y\n";
-		controller.dir.y = controller.Y > 15 ? -1 : (seed * seed) % 2;
-		std::cout << "Calculated y = " << controller.dir.y << "\n";
+	if(player == nullptr) return;
+
+	if (player->controller.X > controller.X){
+
+		if (!Tile::tileSet.matrix[controller.X + 1][controller.Y].m_containedEntity || Tile::tileSet.matrix[controller.X + 1][controller.Y].m_containedEntity->typeId != WALL)
+			controller.dir.x = 1;
+		else{
+			if (controller.Y > player->controller.Y) controller.dir.y = -1;
+			else controller.dir.y = 1;
+		}
+
+	}else if(player->controller.X < controller.X){
+		
+		if (!Tile::tileSet.matrix[controller.X - 1][controller.Y].m_containedEntity || Tile::tileSet.matrix[controller.X - 1][controller.Y].m_containedEntity->typeId != WALL)
+			controller.dir.x = -1;
+		else{
+			if (controller.Y > player->controller.Y) controller.dir.y = -1;
+			else controller.dir.y = 1;
+		}
 	}
+	else if (player->controller.Y > controller.Y){
+
+		if (!Tile::tileSet.matrix[controller.X][controller.Y + 1].m_containedEntity || Tile::tileSet.matrix[controller.X][controller.Y + 1].m_containedEntity->typeId != WALL){
+			controller.dir.y = 1;
+		}else{
+			if (controller.X > player->controller.X) controller.dir.x = -1;
+			else controller.dir.x = 1;
+		}
+
+	}else if (player->controller.Y < controller.Y){
+
+		if (!Tile::tileSet.matrix[controller.X][controller.Y - 1].m_containedEntity || Tile::tileSet.matrix[controller.X][controller.Y - 1].m_containedEntity->typeId != WALL){
+			controller.dir.y = -1;
+		}else{
+			if (controller.X > player->controller.X) controller.dir.x = -1;
+			else controller.dir.x = 1;
+		}
+
+	}
+
 }
 
 void Ghost::Update(){
