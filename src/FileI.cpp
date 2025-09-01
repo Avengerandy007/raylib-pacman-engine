@@ -31,13 +31,16 @@ namespace FileI{
 		
 		uint32_t currentChar = 0;
 		Coin::coinCount = 0;
-		std::string coinCountChars;
-		while(data[currentChar] != ','){
+		std::string coinCountChars = "";
+		while(currentChar <= 400){
+			if (data[currentChar] == ',') break;
 			coinCountChars += data[currentChar];
 			currentChar++;
 		}
-		Coin::coinCount = (uint8_t)std::stoi(coinCountChars);
-		
+
+		Coin::coinCount = coinCountChars != "" ? std::stoi(coinCountChars) : 0;
+		currentChar++;
+
 		for (uint32_t i = 0; i < 20; i++){
 			for (uint32_t k = 0; k < 20; k++){
 				switch (data[currentChar]) {
