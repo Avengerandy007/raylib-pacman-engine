@@ -4,6 +4,7 @@
 #include <cstdint>
 #include <iostream>
 #include <memory>
+#include <vector>
 
 TYPE_OF_INSTANCE instance;
 
@@ -64,6 +65,8 @@ void Player::Update(){
 /*
  *	COIN CLASS
  */
+
+uint8_t Coin::coinCount = 0;
 
 ImageTexture& Coin::Texture(){
 	static ImageTexture texture("Coin.png");

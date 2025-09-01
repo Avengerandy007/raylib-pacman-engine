@@ -4,6 +4,7 @@
 #include <ios>
 #include <memory>
 #include <inttypes.h>
+#include <string>
 #include <utility>
 
 namespace FileI{
@@ -27,8 +28,15 @@ namespace FileI{
 		std::string data;
 		std::getline(file, data, '\0');
 		std::cout << data << "\n";
-
+		
 		uint32_t currentChar = 0;
+		Coin::coinCount = 0;
+		std::string coinCountChars;
+		while(data[currentChar] != ','){
+			coinCountChars += data[currentChar];
+			currentChar++;
+		}
+		Coin::coinCount = (uint8_t)std::stoi(coinCountChars);
 		
 		for (uint32_t i = 0; i < 20; i++){
 			for (uint32_t k = 0; k < 20; k++){
