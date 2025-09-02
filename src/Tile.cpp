@@ -27,6 +27,7 @@ void Tile::SetEntityRectangles(){
 	for (uint8_t i = 0; i < 20; i++){
 		for(uint8_t k = 0; k < 20; k++){
 			if (Tile::tileSet.matrix[i][k].m_containedEntity) Tile::tileSet.matrix[i][k].m_containedEntity->rect = Tile::tileSet.matrix[i][k].m_def;
+			if (Tile::tileSet.matrix[i][k].m_coinContainer) Tile::tileSet.matrix[i][k].m_coinContainer->rect = Tile::tileSet.matrix[i][k].m_def;
 		}
 	}
 	std::cout << "Finished setting all entity rectangles\n";

@@ -56,7 +56,7 @@ namespace FileI{
 						break;
 
 					case '3':
-						matrix.matrix[i][k].m_containedEntity = std::make_unique<Coin>();
+						matrix.matrix[i][k].m_coinContainer= std::make_unique<Coin>();
 						break;
 					case '4':
 						matrix.matrix[i][k].m_containedEntity = std::make_unique<Ghost>(i, k);
