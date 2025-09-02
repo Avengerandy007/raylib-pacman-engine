@@ -64,13 +64,13 @@ void Controller::Move(){
 	std::cout << "Created origin\n";
 
 	if(origin->m_containedEntity == nullptr){
-		std::cerr << "Origin has nullptr\n";
+		std::cout << "Origin has nullptr\n";
 		return;
 	}else if(destination->m_def == nullptr){
-		std::cerr << "Tile at " << (int)destX << ", " << (int)destY << " has null rect\n";
+		std::cout << "Tile at " << (int)destX << ", " << (int)destY << " has null rect\n";
 		return;
 	}else if (origin->m_containedEntity->rect == nullptr){
-		std::cerr << "Origin rect is null\n";
+		std::cout << "Origin rect is null\n";
 		return;
 	}
 
