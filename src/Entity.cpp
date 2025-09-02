@@ -42,15 +42,10 @@ Player::Player(uint8_t x, uint8_t y) : controller(1, x, y){
 }
 
 void Player::HandleCollisions(Tile& currentTile){
-	if (collider.Colliding(currentTile) && !controller.m_calledMoveThisFrame){
-		switch(currentTile.m_containedEntity->typeId){
-			case COIN:
-				score++;
-				currentTile.m_containedEntity = nullptr;
-				break;
-			default: break;
-		}
-	}
+	if (currentTile.m_coinContainer && !controller.m_calledMoveThisFrame){
+		currentTile.m_coinContainer = nullptr;
+		score++;
+	}	
 } 
 
 void Player::Update(){
