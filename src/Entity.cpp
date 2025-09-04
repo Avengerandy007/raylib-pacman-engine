@@ -34,6 +34,8 @@ ImageTexture& Player::Texture(){
 	return texture;
 }
 
+uint32_t Player::score = 0;
+
 Player::Player() : controller(1, 0, 0){}
 
 Player::Player(uint8_t x, uint8_t y) : controller(1, x, y){
