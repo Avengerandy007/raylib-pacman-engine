@@ -12,7 +12,7 @@ namespace FileI{
 		std::cout << "Input the name of the file you want to edit.\n";
 		std::string fileName;
 		std::cin >> fileName;
-		std::ifstream file(fileName);
+		std::ifstream file("./levels/" + fileName);
 		if (file.good()) return file;
 		else {
 			std::cout << "File does not exist. Creating new one.\n";
