@@ -6,5 +6,5 @@
 #include <fstream>
 namespace FileI{
 	extern std::ifstream FindFile();
-	extern Matrix2<Tile, 20> MakeMatrix(std::ifstream file);
+	extern Matrix2<Tile, 20> MakeMatrix(std::ifstream& file);
 }
