@@ -5,22 +5,22 @@
 
 Matrix2<Tile, 20> Tile::tileSet;
 
-void Tile::InitTileSet(){
+void Tile::InitTileSet(const uint8_t size){
 	uint8_t x = 0, y = 0;
 	for (; x < tileSet.matrix.size(); x++){
 		y = 0;
 		for (; y < tileSet.matrix[x].size(); y++){
 			tileSet.matrix[x][y].m_def = std::make_shared<Rectangle>();
-			tileSet.matrix[x][y].SetPosition(x, y);
+			tileSet.matrix[x][y].SetPosition(x, y, size);
 		}
 	}
 }
 
-void Tile::SetPosition(uint8_t x, uint8_t y){
-	m_def->x = x * 50;
-	m_def->y = y * 50;
-	m_def->width = 50;
-	m_def->height = 50;
+void Tile::SetPosition(uint8_t x, uint8_t y, uint8_t size) const{
+	m_def->x = x * size;
+	m_def->y = y * size;
+	m_def->width = size;
+	m_def->height = size;
 }
 
 void Tile::SetEntityRectangles(){
