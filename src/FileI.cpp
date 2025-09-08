@@ -20,21 +20,22 @@ namespace FileI{
 		}
 	}
 
-
-
-	Matrix2<Tile, 20> MakeMatrix(std::ifstream& file){
-		Matrix2<Tile, 20> matrix;
-		if (!file.is_open()) return matrix;
+	std::string FileContent(std::ifstream &file){
+		if (!file.is_open()) return "";
 		std::string data;
 		std::getline(file, data, '\0');
-		std::cout << data << "\n";
+		return data;
+	}
+
+	Matrix2<Tile, 20> CreateTileSet(const std::string fileContent){
+		Matrix2<Tile, 20> matrix;
 		
 		uint32_t currentChar = 0;
 		Coin::coinCount = 0;
 		std::string coinCountChars = "";
 		while(currentChar <= 400){
-			if (data[currentChar] == ',') break;
-			coinCountChars += data[currentChar];
+			if (fileContent[currentChar] == ',') break;
+			coinCountChars += fileContent[currentChar];
 			currentChar++;
 		}
 
@@ -43,7 +44,7 @@ namespace FileI{
 
 		for (uint32_t i = 0; i < 20; i++){
 			for (uint32_t k = 0; k < 20; k++){
-				switch (data[currentChar]) {
+				switch (fileContent[currentChar]) {
 					case '0':
 						break;
 
@@ -63,7 +64,7 @@ namespace FileI{
 						break;
 
 					default:
-						std::cout << "Unrecognized char " << data[currentChar] << "\n";
+						std::cout << "Unrecognized char " << fileContent[currentChar] << "\n";
 						i--;
 						k--;
 						break;
@@ -76,4 +77,7 @@ namespace FileI{
 		return matrix;
 	}
 
+	Matrix2<Tile, 20> MakeMatrix(std::ifstream& file){
+		return CreateTileSet(FileContent(file));
+	}
 }
