@@ -10,8 +10,8 @@ public:
 	std::shared_ptr<Rectangle> m_def; //Definition of tile
 	std::unique_ptr<Entity>	m_containedEntity;
 	std::unique_ptr<Coin> m_coinContainer;
-	static void InitTileSet(const uint8_t size);
-	static void SetEntityRectangles();
+	static void InitTileSet(const uint8_t tileSize, const uint16_t setSize);
+	static void SetEntityRectangles(const uint16_t matrixSize);
 
 	static Matrix2<Tile, 20> tileSet;
 };
