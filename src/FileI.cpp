@@ -27,20 +27,23 @@ namespace FileI{
 		return data;
 	}
 
-	Matrix2<Tile, 20> CreateTileSet(const std::string fileContent){
-		Matrix2<Tile, 20> matrix;
-		
-		uint32_t currentChar = 0;
+
+	uint16_t GetCoinCount(const std::string& fileContent, uint16_t& currentChar){
+
 		Coin::coinCount = 0;
 		std::string coinCountChars = "";
-		while(currentChar <= 400){
-			if (fileContent[currentChar] == ',') break;
+		while(fileContent[currentChar] != ','){
 			coinCountChars += fileContent[currentChar];
 			currentChar++;
-		}
-
-		Coin::coinCount = coinCountChars != "" ? std::stoi(coinCountChars) : 0;
+		}		
 		currentChar++;
+		return coinCountChars != "" ? std::stoi(coinCountChars) : 0;
+	}
+
+	Matrix2<Tile, 20> CreateTileSet(const std::string fileContent, const uint16_t startChar){
+		Matrix2<Tile, 20> matrix;
+		
+		uint16_t currentChar = startChar;
 
 		for (uint32_t i = 0; i < 20; i++){
 			for (uint32_t k = 0; k < 20; k++){
@@ -78,6 +81,9 @@ namespace FileI{
 	}
 
 	Matrix2<Tile, 20> MakeMatrix(std::ifstream& file){
-		return CreateTileSet(FileContent(file));
+		uint16_t current = 0;
+		const std::string fileContent = FileContent(file);
+		Coin::coinCount = GetCoinCount(fileContent, current);
+		return CreateTileSet(fileContent, current);
 	}
 }
