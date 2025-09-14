@@ -1,5 +1,5 @@
 # Compiler
-CXX = x86_64-w64-mingw32-g++
+CXX = g++
 #CXX = clang++
 
 #Raylib lib path
@@ -11,7 +11,7 @@ CXXFLAGS = -std=c++20 -Wall -g $(RayLib --cflags)
 #LDFLAGS  = $(RayLib --libs)
 else
 # Windows deployment
-CXXFLAGS = -std=c++20 -Wall -g -I$(RayLib)/include -static-libstdc++ -static-libgcc -O2 -DNDEBUG
+CXXFLAGS = -std=c++20 -Wall -g -I$(RayLib)/include -O2 -DNDEBUG
 #LDFLAGS  = -L$(RayLib)/lib -lraylib -lopengl32 -lgdi32 -lwinmm -mconsole #-mwindows 
 endif
 
