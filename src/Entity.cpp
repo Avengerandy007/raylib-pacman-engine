@@ -1,10 +1,8 @@
 #include "../include/Entity.hpp"
 #include "../include/Tile.hpp"
-#include <chrono>
 #include <cstdint>
 #include <iostream>
 #include <memory>
-#include <vector>
 
 TYPE_OF_INSTANCE instance;
 

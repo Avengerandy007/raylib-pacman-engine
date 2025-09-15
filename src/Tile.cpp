@@ -1,7 +1,5 @@
 #include "../include/Tile.hpp"
 #include <cstdint>
-#include <iostream>
-#include <memory>
 
 Matrix2<Tile, 20> Tile::tileSet;
 

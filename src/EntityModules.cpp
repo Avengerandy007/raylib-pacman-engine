@@ -1,8 +1,6 @@
 #include "../include/Tile.hpp"
 #include "../include/Entity.hpp"
-#include <map>
 #include <iostream>
-#include <cstddef>
 #include <cstdint>
 #include <memory>
 
