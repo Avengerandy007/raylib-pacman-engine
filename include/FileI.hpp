@@ -40,8 +40,6 @@ namespace FileI{
 
 					default:
 						std::cout << "Unrecognized char " << fileContent[currentChar] << "\n";
-						i--;
-						k--;
 						break;
 
 				}
