@@ -112,6 +112,7 @@ void ImageTexture::Resize(const uint8_t size){
 	const std::string completePath = path + name;
 	image = LoadImage(completePath.c_str());
 	ImageResize(&image, size, size);
+	UnloadTexture(texture);
 	texture = LoadTextureFromImage(image);
 	UnloadImage(image);
 }
