@@ -45,6 +45,8 @@ void Player::HandleCollisions(Tile& currentTile){
 	if (currentTile.m_coinContainer && !controller.m_calledMoveThisFrame){
 		currentTile.m_coinContainer = nullptr;
 		score++;
+	}else if (currentTile.m_containedEntity && currentTile.m_containedEntity->typeId == GHOST){
+		Tile::tileSet.matrix[(int)controller.X][(int)controller.Y].m_containedEntity = nullptr;
 	}	
 } 
 
