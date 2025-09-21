@@ -1,8 +1,6 @@
 #include "../include/Tile.hpp"
 #include "../include/Entity.hpp"
-#include <map>
 #include <iostream>
-#include <cstddef>
 #include <cstdint>
 #include <memory>
 
@@ -100,12 +98,21 @@ const std::string ImageTexture::path = "resources/";
 
 ImageTexture::ImageTexture(){}
 
-ImageTexture::ImageTexture(std::string fileName){
+ImageTexture::ImageTexture(const std::string fileName) : name(fileName){
 	if (fileName == "") return;
 	std::cout << "Assigning " << fileName << " to this\n";
-	std::string completePath = path + fileName;
+	const std::string completePath = path + fileName;
 	image = LoadImage(completePath.c_str());
 	ImageResize(&image, 50, 50);
+	texture = LoadTextureFromImage(image);
+	UnloadImage(image);
+}
+
+void ImageTexture::Resize(const uint8_t size){
+	const std::string completePath = path + name;
+	image = LoadImage(completePath.c_str());
+	ImageResize(&image, size, size);
+	UnloadTexture(texture);
 	texture = LoadTextureFromImage(image);
 	UnloadImage(image);
 }
