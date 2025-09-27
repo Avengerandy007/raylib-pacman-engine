@@ -63,7 +63,7 @@ void Player::Update(){
  *	COIN CLASS
  */
 
-uint8_t Coin::coinCount = 0;
+uint16_t Coin::coinCount = 0;
 
 ImageTexture& Coin::Texture(){
 	static ImageTexture texture("Coin.png");
